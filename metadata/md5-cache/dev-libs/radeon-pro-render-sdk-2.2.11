@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install
+DEPEND=virtual/opencl >=dev-libs/opencl-icd-loader-2021.06.30 examples? ( sys-devel/gcc[openmp] )
+DESCRIPTION=AMD Radeontm ProRender is a powerful physically-based rendering engine
+EAPI=7
+HOMEPAGE=https://www.amd.com/en/technologies/radeon-prorender
+INHERIT=eutils
+IUSE=examples
+KEYWORDS=amd64
+RDEPEND=virtual/opencl >=dev-libs/opencl-icd-loader-2021.06.30 examples? ( sys-devel/gcc[openmp] )
+RESTRICT=strip
+SLOT=0/2.2.11
+SRC_URI=https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderSDK/archive/refs/tags/v2.2.11.tar.gz -> radeon-pro-render-sdk-2.2.11.tar.gz
+_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	23cb2d46c80c12aa8b25973b4cdcb257
+_md5_=1085839eede11cd33768b3e00f8797e9
