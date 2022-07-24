@@ -82,6 +82,7 @@ src_install() {
 			for d in $(find "${S}/tutorials/"  -maxdepth 1 -type d  -name '[0-9]*_*'); do
 				doins -r "$d"
 			done
+			doins -r "${S}/tutorials/common"
 		eend $?
 
 		ebegin "Remove from tutorial *.dll files"
