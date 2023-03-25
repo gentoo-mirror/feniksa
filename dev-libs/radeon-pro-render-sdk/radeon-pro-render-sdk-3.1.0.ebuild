@@ -6,28 +6,23 @@ DESCRIPTION="AMD Radeontm ProRender is a powerful physically-based rendering eng
 HOMEPAGE="https://www.amd.com/en/technologies/radeon-prorender"
 ICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="examples"
+#SRC_URI="https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderSDK/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+# Core release version is 3.1.00 . Last 00 is bad number, temporary hardcode archive name
+SRC_URI="https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderSDK/archive/refs/tags/v3.1.00.patch2.tar.gz -> ${P}.tar.gz"
 
 # should depend from amd or nvidia drivers + opencl
 RDEPEND="virtual/opencl
 		>=dev-libs/opencl-icd-loader-2021.06.30
 		=dev-libs/radeon-pro-render-sdk-kernels-9999
-		examples? ( sys-devel/gcc[openmp] )"
+		examples? ( sys-devel/gcc[openmp] media-libs/glew )"
 DEPEND="${RDEPEND}"
 RESTRICT="strip"
 
-S="${WORKDIR}/RadeonProRenderSDK-${PV}"
-
-if [[ ${PV} == "9999" ]]; then
-    EGIT_REPO_URI="https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderSDK.git"
-    EGIT_BRANCH="master"
-	inherit git-r3
-
-	S="${WORKDIR}/radeon-pro-render-sdk-9999"
-else
-	SRC_URI="https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderSDK/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-fi
+#S="${WORKDIR}/RadeonProRenderSDK-${PV}"
+# Core release version is 3.1.00 . Last 00 is bad number, temporary hardcode archive name
+S="${WORKDIR}/RadeonProRenderSDK-3.1.00.patch2"
 
 src_configure() {
 	default
@@ -81,7 +76,6 @@ src_install() {
 	doins release_notes.txt
 
 	if use examples; then
-
 		ebegin "Install tutorial resources"
 			insinto "/usr/share/RadeonProRender"
 			doins -r Resources
@@ -92,6 +86,7 @@ src_install() {
 			for d in $(find "${S}/tutorials/"  -maxdepth 1 -type d  -name '[0-9]*_*'); do
 				doins -r "$d"
 			done
+			doins -r "${S}/tutorials/common"
 		eend $?
 
 		ebegin "Remove from tutorial *.dll files"
@@ -121,5 +116,4 @@ src_install() {
 		eend $?
 	fi
 }
-
 
