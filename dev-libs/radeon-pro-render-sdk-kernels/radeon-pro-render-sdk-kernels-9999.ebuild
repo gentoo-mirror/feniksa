@@ -1,6 +1,6 @@
-EAPI=7
+EAPI=8
 
-inherit eutils git-r3
+inherit git-r3
 
 DESCRIPTION="AMD Radeon Pro Render precompiled kernels"
 HOMEPAGE="https://www.amd.com/en/technologies/radeon-prorender"
