@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile configure install
+DEPEND=virtual/opencl media-libs/mesa[vulkan] =dev-libs/radeon-pro-render-sdk-kernels-9999 examples? ( sys-devel/gcc[openmp] media-libs/glew )
+DESCRIPTION=AMD Radeontm ProRender is a powerful physically-based rendering engine
+EAPI=8
+HOMEPAGE=https://www.amd.com/en/technologies/radeon-prorender
+IUSE=examples
+KEYWORDS=amd64
+RDEPEND=virtual/opencl media-libs/mesa[vulkan] =dev-libs/radeon-pro-render-sdk-kernels-9999 examples? ( sys-devel/gcc[openmp] media-libs/glew )
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderSDK/archive/refs/tags/v3.1.3.tar.gz -> radeon-pro-render-sdk-3.1.3.tar.gz
+_md5_=18ef868e61e768a069ed213e48878857
