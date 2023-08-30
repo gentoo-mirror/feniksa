@@ -1,29 +1,22 @@
-EAPI=7
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="AMD Radeontm ProRender is a powerful physically-based rendering engine"
 HOMEPAGE="https://www.amd.com/en/technologies/radeon-prorender"
 ICENSE="Apache-2.0"
-SLOT="0/${PV}"
+SLOT="0"
 KEYWORDS="amd64"
 IUSE="examples"
 SRC_URI="https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderSDK/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
-# should depend from amd or nvidia drivers + opencl
+# should depend from amd or nvidia drivers + opencl / vulkan
 RDEPEND="virtual/opencl
-		>=dev-libs/opencl-icd-loader-2021.06.30"
+		media-libs/mesa[vulkan]
+		=dev-libs/radeon-pro-render-sdk-kernels-9999
+		examples? ( sys-devel/gcc[openmp] media-libs/glew )"
 DEPEND="${RDEPEND}"
 RESTRICT="strip"
 
-PATCHES=(
-	"${FILESDIR}/0001-32_gl_interop-main.cpp-fix-error-and-warnings.patch"
-	"${FILESDIR}/0002-Add-executable-flag-for-premake5-by-default.patch"
-	"${FILESDIR}/0003-Fix-warning-multi-character-character-constant.patch"
-)
-
-
-S="${WORKDIR}/RadeonProRenderSDK-2.2.9"
+S="${WORKDIR}/RadeonProRenderSDK-${PV}"
 
 src_configure() {
 	default
@@ -65,10 +58,12 @@ src_install() {
 	)
 
 	for lib in "${libs[@]}"; do
-		dolib.so RadeonProRender/binUbuntu18/${lib}
+		dolib.so RadeonProRender/binUbuntu20/${lib}
 	done
 
-	dobin RadeonProRender/binUbuntu18/RprTextureCompiler64
+	dobin RadeonProRender/binUbuntu20/RprTextureCompiler64
+	dobin RadeonProRender/binUbuntu20/RprsRender64
+
 	doheader RadeonProRender/inc/*
 
 	insinto "/usr/share/RadeonProRender"
@@ -77,7 +72,6 @@ src_install() {
 	doins release_notes.txt
 
 	if use examples; then
-
 		ebegin "Install tutorial resources"
 			insinto "/usr/share/RadeonProRender"
 			doins -r Resources
@@ -88,6 +82,7 @@ src_install() {
 			for d in $(find "${S}/tutorials/"  -maxdepth 1 -type d  -name '[0-9]*_*'); do
 				doins -r "$d"
 			done
+			doins -r "${S}/tutorials/common"
 		eend $?
 
 		ebegin "Remove from tutorial *.dll files"
@@ -117,5 +112,4 @@ src_install() {
 		eend $?
 	fi
 }
-
 

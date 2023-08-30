@@ -1,6 +1,6 @@
-EAPI=7
+EAPI=8
 
-inherit eutils cmake
+inherit cmake
 
 DESCRIPTION="AMD Radeon Image Filter SDK"
 HOMEPAGE="https://www.amd.com/en/technologies/radeon-prorender"
