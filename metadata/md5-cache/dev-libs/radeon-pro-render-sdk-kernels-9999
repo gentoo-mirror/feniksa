@@ -9,5 +9,5 @@ PROPERTIES=live
 RESTRICT=strip
 SLOT=0
 SRC_URI=https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderSDK/archive/refs/tags/v3.1.00.patch2.tar.gz -> radeon-pro-render-sdk-kernels-9999.tar.gz
-_eclasses_=git-r3	2358a7b20091609e24bd3a83b3ac5991
+_eclasses_=git-r3	5133e393e8717a3a093660f990801dc1
 _md5_=b54f415f4239f57c1e6556d22c3289e5

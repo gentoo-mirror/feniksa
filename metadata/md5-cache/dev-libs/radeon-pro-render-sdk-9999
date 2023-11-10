@@ -11,5 +11,5 @@ PROPERTIES=live
 RDEPEND=virtual/opencl media-libs/mesa[vulkan] =dev-libs/radeon-pro-render-sdk-kernels-9999 examples? ( sys-devel/gcc[openmp] media-libs/glew )
 RESTRICT=strip
 SLOT=0
-_eclasses_=git-r3	2358a7b20091609e24bd3a83b3ac5991
+_eclasses_=git-r3	5133e393e8717a3a093660f990801dc1
 _md5_=a63ad0ff64dd90a17fa49de430bfcd50
